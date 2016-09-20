@@ -13,9 +13,6 @@ from openpyxl import Workbook
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-"""
-帮人写的一个爬Kstore会员订单的爬虫
-"""
 
 login_url = 'http://kstore.qianmi.com/checklogin.htm'
 order_url = 'http://kstore.qianmi.com/myorder.htm?pageNo='
@@ -25,6 +22,7 @@ opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
 order_code_pattern = re.compile(r'\d{16}')
 order_amount_pattern = re.compile(r'\d+\.\d{2}')
+
 
 login_data = {
     'username': 'qianmi',
