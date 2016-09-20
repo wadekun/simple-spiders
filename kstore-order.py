@@ -25,9 +25,9 @@ order_amount_pattern = re.compile(r'\d+\.\d{2}')
 
 
 login_data = {
-    'username': 'qianmi',
-    'password': 'qianmi520',
-    'url': 'index.html',
+    'username': '',
+    'password': '',
+    'url': '',
     'type': '0'
 }
 
