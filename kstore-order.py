@@ -13,6 +13,10 @@ from openpyxl import Workbook
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+"""
+帮人写的一个爬Kstore会员订单的爬虫
+"""
+
 login_url = 'http://kstore.qianmi.com/checklogin.htm'
 order_url = 'http://kstore.qianmi.com/myorder.htm?pageNo='
 
@@ -23,8 +27,8 @@ order_code_pattern = re.compile(r'\d{16}')
 order_amount_pattern = re.compile(r'\d+\.\d{2}')
 
 login_data = {
-    'username': '',
-    'password': '',
+    'username': 'qianmi',
+    'password': 'qianmi520',
     'url': 'index.html',
     'type': '0'
 }
@@ -54,9 +58,17 @@ def crawl_order():
             order_amount = get_order_amount(order)
             print '=========================\n'
             order_list.append([order_code, order_goods, customer_name, order_amount])
-        if len(order_body_list) < 5:
+        if not has_next_page(order_list_div):
             break
     return order_list
+
+
+def has_next_page(order_content):
+    non_next_btn = order_content.find('div', {'class': 'paging_area'}).find('a', {'class': 'next_null'})
+    if non_next_btn:
+        return False
+    else:
+        return True
 
 
 def write_excel(order_list):
